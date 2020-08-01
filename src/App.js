@@ -1,26 +1,65 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState, useReducer } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import HomePage from "./component/HomePage";
+import DetailsPage from "./component/DetailsPage";
+import * as test from "./test.json";
 
 function App() {
+  const [recipes, setRecipes] = useState(
+    JSON.parse(JSON.stringify(test)).default
+  );
+  console.log("dinesh =====");
+  useEffect(() => {
+    fetch("http://starlord.hackerearth.com/recipe")
+      .then((resp) => resp.json())
+      .then((result) => setRecipes(result));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <HomePage
+              recipes={recipes}
+              setRecipes={setRecipes}
+              changeFav={(id) => setRecipes(changeFav(recipes, id))}
+              searchRecipe={(value) => setRecipes(searchRecipe(recipes, value))}
+            />
+          )}
+        />
+        <Route
+          path="/recipes/:id"
+          render={() => {
+            return (
+              <DetailsPage
+                recipes={recipes}
+                changeFav={(id) => setRecipes(changeFav(recipes, id))}
+              />
+            );
+          }}
+        />
+      </Router>
     </div>
   );
 }
+
+const changeFav = (recipes, id) => {
+  return recipes.map((recipe) => {
+    if (recipe.id === id) return { ...recipe, isFav: !recipe.isFav };
+    return recipe;
+  });
+};
+
+const searchRecipe = (recipes, val) => {
+  return recipes.map((recipe) => {
+    if (val && recipe.name.toLowerCase().includes(val.toLowerCase()))
+      return { ...recipe, isSearch: true };
+    else return { ...recipe, isSearch: false };
+  });
+};
 
 export default App;
