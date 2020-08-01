@@ -56,7 +56,11 @@ export default function DetailsPage(props) {
         </Button>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={6}>
-            <img src={recipe.image} className={classes.image} />
+            <img
+              src={recipe.image}
+              className={classes.image}
+              alt={recipe.name}
+            />
           </Grid>
           <Grid item xs={12} lg={6}>
             <Typography align="right" color="textSecondary">
