@@ -44,7 +44,6 @@ export default function DetailsPage(props) {
   const { id } = useParams();
   const history = useHistory();
   const recipe = props.recipes.find((recipe) => recipe.id == id);
-  console.log("dinesh =====", props.recipes);
   return (
     <div style={{ backgroundColor: "white" }}>
       <div className={classes.root}>

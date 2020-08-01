@@ -1,15 +1,11 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./component/HomePage";
 import DetailsPage from "./component/DetailsPage";
-import * as test from "./test.json";
 
 function App() {
-  const [recipes, setRecipes] = useState(
-    JSON.parse(JSON.stringify(test)).default
-  );
-  console.log("dinesh =====");
+  const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     fetch("http://starlord.hackerearth.com/recipe")
       .then((resp) => resp.json())
