@@ -43,7 +43,7 @@ export default function DetailsPage(props) {
   const classes = useStyles();
   const { id } = useParams();
   const history = useHistory();
-  const recipe = props.recipes.find((recipe) => recipe.id == id);
+  const recipe = props.recipes.find((recipe) => recipe.id === parseInt(id));
   return (
     <div style={{ backgroundColor: "white" }}>
       <div className={classes.root}>
