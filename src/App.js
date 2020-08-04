@@ -3,9 +3,10 @@ import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./component/HomePage";
 import DetailsPage from "./component/DetailsPage";
+import * as test from "./test.json";
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(test.default);
   useEffect(() => {
     fetch("http://starlord.hackerearth.com/recipe")
       .then((resp) => resp.json())

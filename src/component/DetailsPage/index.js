@@ -71,7 +71,11 @@ export default function DetailsPage(props) {
               {" "}
               {recipe.name}
             </Typography>
-            <Box component="fieldset" borderColor="transparent">
+            <Box
+              component="fieldset"
+              borderColor="transparent"
+              style={{ float: "right" }}
+            >
               <Rating
                 defaultValue={4}
                 getLabelText={(value) => customIcons[value].label}
